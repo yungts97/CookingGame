@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background1"
+    android:orientation="vertical"
+    tools:context=".SettingScreen">
+
+    <ImageButton
+        android:id="@+id/btnClose1"
+        android:padding="15dp"
+        android:src="@drawable/close"
+        android:background="@android:color/transparent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="40dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/image"/>
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Background"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:layout_marginLeft="20dp"/>
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/img_thumbnail"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_width="wrap_content"
+        android:scaleType="fitXY"
+        android:layout_height="500dp"
+        android:src="@drawable/background"/>
+
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="40dp"
+            android:id="@+id/imageBGM"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/audio"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BGM Sound"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:layout_marginLeft="20dp"/>
+
+        <Switch
+            android:id="@+id/switch_bgm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:textColor="@android:color/white"
+            android:textSize="30dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="40dp"
+            android:id="@+id/imageSound"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/audio"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sound Effect"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:layout_marginLeft="20dp"/>
+
+        <Switch
+            android:id="@+id/switch_sound"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:textColor="@android:color/white"
+            android:textSize="30dp" />
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

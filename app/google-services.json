@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "488927546715",
+    "firebase_url": "https://cookinggame-def5d.firebaseio.com",
+    "project_id": "cookinggame-def5d",
+    "storage_bucket": "cookinggame-def5d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:488927546715:android:c4e04f713ac186f253de7e",
+        "android_client_info": {
+          "package_name": "com.example.cookinggame"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "488927546715-djtloak851hfk9ajh5hm4rpmvh44juhp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.cookinggame",
+            "certificate_hash": "164dd3d830af4a39f65a614d01ddc012a51f00a1"
+          }
+        },
+        {
+          "client_id": "488927546715-fqimg0o96uj2g3fksnuskfeb40reva1h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKbp2uFfJ0uZW7fAd7nZZyghc1jkYk4rY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "488927546715-fqimg0o96uj2g3fksnuskfeb40reva1h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

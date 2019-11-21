@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">CookingGame</string>
+    <string-array name="backgrounds">
+        <item>Background 1</item>
+        <item>Background 2</item>
+        <item>Background 3</item>
+    </string-array>
+    <string-array name="foods">
+        <item>Honey Sauce Pork</item>
+        <item>Mushroom Soup</item>
+        <item>Half-cooked Egg</item>
+        <item>Pork cucumber</item>
+        <item>Mixed BBQ</item>
+    </string-array>
+    <string-array name="food_images">
+        <item>food_01</item>
+        <item>food_02</item>
+        <item>food_03</item>
+        <item>food_04</item>
+        <item>food_05</item>
+    </string-array>
+</resources>

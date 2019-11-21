@@ -1,0 +1,780 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/game_background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".StartGameScreen">
+
+
+    <LinearLayout
+        android:id="@+id/readyScreen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#bc000000"
+        android:translationZ="90dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imgReady"
+            android:layout_marginTop="310dp"
+            android:src="@drawable/ready"
+            android:layout_gravity="center"
+            android:layout_width="250dp"
+            android:layout_height="100dp"/>
+
+        <ImageView
+            android:id="@+id/imgTap"
+            android:layout_marginTop="35dp"
+            android:src="@drawable/tap"
+            android:layout_gravity="center"
+            android:layout_width="180dp"
+            android:layout_height="100dp"/>
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/txtScore"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:padding="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:textColor="@android:color/white"
+        android:text="Score: "
+        android:textStyle="bold"
+        android:textSize="20dp"/>
+    
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/foodView"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:padding="10dp"
+        android:background="@color/colorPrimary"
+        app:layout_constraintTop_toBottomOf="@id/txtScore"
+        app:layout_constraintLeft_toLeftOf="@id/txtScore">
+
+        <ImageView
+            android:id="@+id/imageFood"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="60dp"
+            android:layout_height="60dp"/>
+        <TextView
+            android:paddingRight="50dp"
+            android:id="@+id/txtFood"
+            android:layout_marginLeft="30dp"
+            android:textSize="20dp"
+            app:layout_constraintLeft_toRightOf="@+id/imageFood"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:textColor="@android:color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:layout_marginTop="10dp"
+        android:id="@+id/selector1"
+        android:scaleType="fitXY"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        app:layout_constraintTop_toBottomOf="@id/foodView"
+        app:layout_constraintLeft_toLeftOf="@id/recipeView"
+        app:layout_constraintRight_toRightOf="@id/recipeView"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:padding="10dp"
+        android:id="@+id/recipeView"
+        android:background="@color/colorPrimary"
+        app:layout_constraintTop_toBottomOf="@id/foodView"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+
+        <TextView
+            android:id="@+id/txtRecipe1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Recipe Set 1"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"/>
+
+        <ImageView
+            android:id="@+id/imgRecipe1"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/image_border"
+            app:layout_constraintLeft_toRightOf="@id/txtRecipe1"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="40dp"
+            android:layout_height="40dp"/>
+
+        <ImageView
+            android:id="@+id/imgRecipe2"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/image_border"
+            app:layout_constraintLeft_toRightOf="@id/imgRecipe1"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="40dp"
+            android:layout_height="40dp"/>
+
+        <ImageView
+            android:id="@+id/imgRecipe3"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/image_border"
+            app:layout_constraintLeft_toRightOf="@id/imgRecipe2"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="40dp"
+            android:layout_height="40dp"/>
+
+        <ImageView
+            android:id="@+id/imgRecipe4"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/image_border"
+            app:layout_constraintLeft_toRightOf="@id/imgRecipe3"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="40dp"
+            android:layout_height="40dp"/>
+
+        <TextView
+            android:id="@+id/txtRecipeAmt1"
+            android:layout_marginTop="5dp"
+            app:layout_constraintLeft_toLeftOf="@id/imgRecipe1"
+            app:layout_constraintRight_toRightOf="@id/imgRecipe1"
+            app:layout_constraintTop_toBottomOf="@id/imgRecipe1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/txtRecipeAmt2"
+            android:layout_marginTop="5dp"
+            app:layout_constraintLeft_toLeftOf="@id/imgRecipe2"
+            app:layout_constraintRight_toRightOf="@id/imgRecipe2"
+            app:layout_constraintTop_toBottomOf="@id/imgRecipe2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/txtRecipeAmt3"
+            android:layout_marginTop="5dp"
+            app:layout_constraintLeft_toLeftOf="@id/imgRecipe3"
+            app:layout_constraintRight_toRightOf="@id/imgRecipe3"
+            app:layout_constraintTop_toBottomOf="@id/imgRecipe3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"/>
+
+        <TextView
+            android:id="@+id/txtRecipeAmt4"
+            android:layout_marginTop="5dp"
+            app:layout_constraintLeft_toLeftOf="@id/imgRecipe4"
+            app:layout_constraintRight_toRightOf="@id/imgRecipe4"
+            app:layout_constraintTop_toBottomOf="@id/imgRecipe4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/selector2"
+        android:scaleType="fitXY"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        app:layout_constraintTop_toBottomOf="@id/recipeView"
+        app:layout_constraintLeft_toLeftOf="@id/recipeView"
+        app:layout_constraintRight_toRightOf="@id/recipeView"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:padding="10dp"
+        android:id="@+id/recipeView1"
+        android:background="@color/colorPrimary"
+        app:layout_constraintTop_toBottomOf="@id/recipeView"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <TextView
+            android:id="@+id/txtRecipe2"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Recipe Set 2"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"/>
+
+        <ImageView
+            android:id="@+id/imgRecipe5"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/image_border"
+            app:layout_constraintLeft_toRightOf="@id/txtRecipe2"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="40dp"
+            android:layout_height="40dp"/>
+
+        <ImageView
+            android:id="@+id/imgRecipe6"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/image_border"
+            app:layout_constraintLeft_toRightOf="@id/imgRecipe5"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="40dp"
+            android:layout_height="40dp"/>
+
+        <ImageView
+            android:id="@+id/imgRecipe7"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/image_border"
+            app:layout_constraintLeft_toRightOf="@id/imgRecipe6"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="40dp"
+            android:layout_height="40dp"/>
+
+        <ImageView
+            android:id="@+id/imgRecipe8"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/image_border"
+            app:layout_constraintLeft_toRightOf="@id/imgRecipe7"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="40dp"
+            android:layout_height="40dp"/>
+
+        <TextView
+            android:id="@+id/txtRecipeAmt5"
+            android:layout_marginTop="5dp"
+            app:layout_constraintLeft_toLeftOf="@id/imgRecipe5"
+            app:layout_constraintRight_toRightOf="@id/imgRecipe5"
+            app:layout_constraintTop_toBottomOf="@id/imgRecipe5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"/>
+
+        <TextView
+            android:id="@+id/txtRecipeAmt6"
+            android:layout_marginTop="5dp"
+            app:layout_constraintLeft_toLeftOf="@id/imgRecipe6"
+            app:layout_constraintRight_toRightOf="@id/imgRecipe6"
+            app:layout_constraintTop_toBottomOf="@id/imgRecipe6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"/>
+
+        <TextView
+            android:id="@+id/txtRecipeAmt7"
+            android:layout_marginTop="5dp"
+            app:layout_constraintLeft_toLeftOf="@id/imgRecipe7"
+            app:layout_constraintRight_toRightOf="@id/imgRecipe7"
+            app:layout_constraintTop_toBottomOf="@id/imgRecipe7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"/>
+
+        <TextView
+            android:id="@+id/txtRecipeAmt8"
+            android:layout_marginTop="5dp"
+            app:layout_constraintLeft_toLeftOf="@id/imgRecipe8"
+            app:layout_constraintRight_toRightOf="@id/imgRecipe8"
+            app:layout_constraintTop_toBottomOf="@id/imgRecipe8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/btnCook"
+        android:layout_marginTop="10dp"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Cook"
+        android:textColor="@android:color/white"
+        android:background="@color/colorPrimary"
+        android:textStyle="bold"
+        app:layout_constraintRight_toRightOf="@id/recipeView1"
+        app:layout_constraintTop_toBottomOf="@id/recipeView1"/>
+
+    <ProgressBar
+        android:id="@+id/progressBar1"
+        android:layout_marginTop="10dp"
+        style="@style/CustomProgressBar"
+        app:layout_constraintTop_toBottomOf="@id/btnCook"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:progress="100"
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
+
+    <TextView
+        android:id="@+id/txtTime"
+        app:layout_constraintLeft_toLeftOf="@id/progressBar1"
+        app:layout_constraintRight_toRightOf="@id/progressBar1"
+        app:layout_constraintTop_toTopOf="@id/progressBar1"
+        app:layout_constraintBottom_toBottomOf="@id/progressBar1"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TableLayout
+        android:id="@+id/itemView"
+        android:layout_marginTop="10dp"
+        android:background="@color/colorPrimary"
+        app:layout_constraintTop_toBottomOf="@id/progressBar1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:padding="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TableRow
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="10dp">
+            <ImageView
+                android:id="@+id/imgItem1"
+                android:background="@drawable/image_border"
+                app:layout_constraintLeft_toRightOf="@id/txtRecipe2"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+
+            <ImageView
+                android:id="@+id/imgItem2"
+                android:background="@drawable/image_border"
+                app:layout_constraintLeft_toRightOf="@id/txtRecipe2"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="11dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+
+            <ImageView
+                android:id="@+id/imgItem3"
+                android:background="@drawable/image_border"
+                app:layout_constraintLeft_toRightOf="@id/txtRecipe2"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="11dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+
+            <ImageView
+                android:id="@+id/imgItem4"
+                android:background="@drawable/image_border"
+                app:layout_constraintLeft_toRightOf="@id/txtRecipe2"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="11dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+
+            <ImageView
+                android:id="@+id/imgItem5"
+                android:background="@drawable/image_border"
+                app:layout_constraintLeft_toRightOf="@id/txtRecipe2"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="11dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+
+            <ImageView
+                android:id="@+id/imgItem6"
+                android:background="@drawable/image_border"
+                app:layout_constraintLeft_toRightOf="@id/txtRecipe2"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="11dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+
+            <ImageView
+                android:id="@+id/imgItem7"
+                android:background="@drawable/image_border"
+                app:layout_constraintLeft_toRightOf="@id/txtRecipe2"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="11dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="10dp">
+            <ImageView
+                android:id="@+id/imgItem8"
+                android:background="@drawable/image_border"
+                app:layout_constraintLeft_toRightOf="@id/txtRecipe2"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+
+            <ImageView
+                android:id="@+id/imgItem9"
+                android:background="@drawable/image_border"
+                app:layout_constraintLeft_toRightOf="@id/txtRecipe2"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="11dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+
+            <ImageView
+                android:id="@+id/imgItem10"
+                android:background="@drawable/image_border"
+                app:layout_constraintLeft_toRightOf="@id/txtRecipe2"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="11dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+
+            <ImageView
+                android:id="@+id/imgItem11"
+                android:background="@drawable/image_border"
+                app:layout_constraintLeft_toRightOf="@id/txtRecipe2"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="11dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+
+            <ImageView
+                android:id="@+id/imgItem12"
+                android:background="@drawable/image_border"
+                app:layout_constraintLeft_toRightOf="@id/txtRecipe2"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="11dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+
+            <ImageView
+                android:id="@+id/imgItem13"
+                android:background="@drawable/image_border"
+                app:layout_constraintLeft_toRightOf="@id/txtRecipe2"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="11dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+
+            <ImageView
+                android:id="@+id/imgItem14"
+                android:background="@drawable/image_border"
+                app:layout_constraintLeft_toRightOf="@id/txtRecipe2"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="11dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="10dp">
+            <ImageView
+                android:id="@+id/imgItem15"
+                android:background="@drawable/image_border"
+                app:layout_constraintLeft_toRightOf="@id/txtRecipe2"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+
+            <ImageView
+                android:id="@+id/imgItem16"
+                android:background="@drawable/image_border"
+                app:layout_constraintLeft_toRightOf="@id/txtRecipe2"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="11dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+
+            <ImageView
+                android:id="@+id/imgItem17"
+                android:background="@drawable/image_border"
+                app:layout_constraintLeft_toRightOf="@id/txtRecipe2"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="11dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+
+            <ImageView
+                android:id="@+id/imgItem18"
+                android:background="@drawable/image_border"
+                app:layout_constraintLeft_toRightOf="@id/txtRecipe2"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="11dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+
+            <ImageView
+                android:id="@+id/imgItem19"
+                android:background="@drawable/image_border"
+                app:layout_constraintLeft_toRightOf="@id/txtRecipe2"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="11dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+
+            <ImageView
+                android:id="@+id/imgItem20"
+                android:background="@drawable/image_border"
+                app:layout_constraintLeft_toRightOf="@id/txtRecipe2"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="11dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+
+            <ImageView
+                android:id="@+id/imgItem21"
+                android:background="@drawable/image_border"
+                app:layout_constraintLeft_toRightOf="@id/txtRecipe2"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="11dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="10dp">
+            <ImageView
+                android:id="@+id/imgItem22"
+                android:background="@drawable/image_border"
+                app:layout_constraintLeft_toRightOf="@id/txtRecipe2"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+
+            <ImageView
+                android:id="@+id/imgItem23"
+                android:background="@drawable/image_border"
+                app:layout_constraintLeft_toRightOf="@id/txtRecipe2"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="11dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+
+            <ImageView
+                android:id="@+id/imgItem24"
+                android:background="@drawable/image_border"
+                app:layout_constraintLeft_toRightOf="@id/txtRecipe2"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="11dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+
+            <ImageView
+                android:id="@+id/imgItem25"
+                android:background="@drawable/image_border"
+                app:layout_constraintLeft_toRightOf="@id/txtRecipe2"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="11dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+
+            <ImageView
+                android:id="@+id/imgItem26"
+                android:background="@drawable/image_border"
+                app:layout_constraintLeft_toRightOf="@id/txtRecipe2"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="11dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+
+            <ImageView
+                android:id="@+id/imgItem27"
+                android:background="@drawable/image_border"
+                app:layout_constraintLeft_toRightOf="@id/txtRecipe2"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="11dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+
+            <ImageView
+                android:id="@+id/imgItem28"
+                android:background="@drawable/image_border"
+                app:layout_constraintLeft_toRightOf="@id/txtRecipe2"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="11dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="10dp">
+            <ImageView
+                android:id="@+id/imgItem29"
+                android:background="@drawable/image_border"
+                app:layout_constraintLeft_toRightOf="@id/txtRecipe2"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+
+            <ImageView
+                android:id="@+id/imgItem30"
+                android:background="@drawable/image_border"
+                app:layout_constraintLeft_toRightOf="@id/txtRecipe2"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="11dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+
+            <ImageView
+                android:id="@+id/imgItem31"
+                android:background="@drawable/image_border"
+                app:layout_constraintLeft_toRightOf="@id/txtRecipe2"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="11dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+
+            <ImageView
+                android:id="@+id/imgItem32"
+                android:background="@drawable/image_border"
+                app:layout_constraintLeft_toRightOf="@id/txtRecipe2"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="11dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+
+            <ImageView
+                android:id="@+id/imgItem33"
+                android:background="@drawable/image_border"
+                app:layout_constraintLeft_toRightOf="@id/txtRecipe2"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="11dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+
+            <ImageView
+                android:id="@+id/imgItem34"
+                android:background="@drawable/image_border"
+                app:layout_constraintLeft_toRightOf="@id/txtRecipe2"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="11dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+
+            <ImageView
+                android:id="@+id/imgItem35"
+                android:background="@drawable/image_border"
+                app:layout_constraintLeft_toRightOf="@id/txtRecipe2"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="11dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="10dp">
+            <ImageView
+                android:id="@+id/imgItem36"
+                android:background="@drawable/image_border"
+                app:layout_constraintLeft_toRightOf="@id/txtRecipe2"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+
+            <ImageView
+                android:id="@+id/imgItem37"
+                android:background="@drawable/image_border"
+                app:layout_constraintLeft_toRightOf="@id/txtRecipe2"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="11dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+
+            <ImageView
+                android:id="@+id/imgItem38"
+                android:background="@drawable/image_border"
+                app:layout_constraintLeft_toRightOf="@id/txtRecipe2"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="11dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+
+            <ImageView
+                android:id="@+id/imgItem39"
+                android:background="@drawable/image_border"
+                app:layout_constraintLeft_toRightOf="@id/txtRecipe2"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="11dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+
+            <ImageView
+                android:id="@+id/imgItem40"
+                android:background="@drawable/image_border"
+                app:layout_constraintLeft_toRightOf="@id/txtRecipe2"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="11dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+
+            <ImageView
+                android:id="@+id/imgItem41"
+                android:background="@drawable/image_border"
+                app:layout_constraintLeft_toRightOf="@id/txtRecipe2"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="11dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+
+            <ImageView
+                android:id="@+id/imgItem42"
+                android:background="@drawable/image_border"
+                app:layout_constraintLeft_toRightOf="@id/txtRecipe2"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="11dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+
+
+        </TableRow>
+
+    </TableLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
