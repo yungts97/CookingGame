@@ -67,16 +67,23 @@ public class StartGameScreen extends AppCompatActivity implements View.OnClickLi
     private boolean flagGameTimer;
     private Animation animation;
     private Animation animation1;
+    private MediaPlayerHelper GameBGMplayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_game_screen);
         MainActivity.BGMplayer.Stop();
-        MainActivity.GameBGMplayer = new MediaPlayerHelper(MediaPlayer.create(this,R.raw.gameplay_bgm));
+        GameBGMplayer = new MediaPlayerHelper(MediaPlayer.create(this,R.raw.gameplay_bgm));
         initData();
         iniUI();
         setBackground();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        GameBGMplayer.Stop();
     }
 
     private void setBackground()
@@ -84,12 +91,12 @@ public class StartGameScreen extends AppCompatActivity implements View.OnClickLi
         if(MainActivity.background== 1)
             gameBackground.setBackgroundResource(R.drawable.background);
         else if(MainActivity.background== 2)
-            gameBackground.setBackgroundResource(R.drawable.night_woodenbridge);
+            gameBackground.setBackgroundResource(R.drawable.pink_background);
         else if(MainActivity.background== 3)
-            gameBackground.setBackgroundResource(R.drawable.stars);
+            gameBackground.setBackgroundResource(R.drawable.purple_background);
     }
     private void StartShowIngredientTimer() {
-        MainActivity.GameBGMplayer.Play(true);
+        GameBGMplayer.Play(true);
         progressBar.setMax(secondForShowIngredient);
         showIngredientTimer.schedule(new TimerTask() {
             @Override

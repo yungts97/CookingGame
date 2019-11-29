@@ -29,18 +29,17 @@ public class SettingScreen extends AppCompatActivity implements View.OnClickList
 
         btnClose = findViewById(R.id.btnClose1);
         btnClose.setOnClickListener(this);
-        imgBGM = findViewById(R.id.imageBGM);
-        imgSoundEffect = findViewById(R.id.imageSound);
         imgThumbnail = findViewById(R.id.img_thumbnail);
 
         spinner = findViewById(R.id.spinner);
         ArrayList<String> arrayList = new ArrayList<>();
         arrayList.add("Elegant Restaurant");
-        arrayList.add("Night River");
-        arrayList.add("Universal");
+        arrayList.add("Pink Background");
+        arrayList.add("Purple Background");
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.spinner_item, arrayList);
         arrayAdapter.setDropDownViewResource(R.layout.spinner_item);
         spinner.setAdapter(arrayAdapter);
+        spinner.setSelection(MainActivity.background-1);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
            @Override
            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -50,14 +49,14 @@ public class SettingScreen extends AppCompatActivity implements View.OnClickList
                    imgThumbnail.setImageResource(R.drawable.background);
                    MainActivity.background= 1;
                }
-               else if(selected == "Night River")
+               else if(selected == "Pink Background")
                {
-                   imgThumbnail.setImageResource(R.drawable.night_woodenbridge);
+                   imgThumbnail.setImageResource(R.drawable.pink_background);
                    MainActivity.background= 2;
                }
-               else if(selected == "Universal")
+               else if(selected == "Purple Background")
                {
-                   imgThumbnail.setImageResource(R.drawable.stars);
+                   imgThumbnail.setImageResource(R.drawable.purple_background);
                    MainActivity.background= 3;
                }
            }
@@ -67,8 +66,6 @@ public class SettingScreen extends AppCompatActivity implements View.OnClickList
 
            }
        });
-        BGMSwitch = findViewById(R.id.switch_bgm);
-        SoundEffectSwitch = findViewById(R.id.switch_sound);
     }
 
     @Override

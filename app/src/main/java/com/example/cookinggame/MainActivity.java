@@ -78,7 +78,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             }
         });
+        if(BGMplayer == null || BGMplayer.get_player() == null)
+        {
+            BGMplayer = new MediaPlayerHelper(MediaPlayer.create(this,R.raw.bgm));
+            BGMplayer.Play(true);
+        }
     }
+
 
     private void retrieveIngredientsFromFirebase()
     {
@@ -283,8 +289,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void iniUI()
     {
-        BGMplayer = new MediaPlayerHelper(MediaPlayer.create(this,R.raw.bgm));
-        BGMplayer.Play(true);
+        /*BGMplayer = new MediaPlayerHelper(MediaPlayer.create(this,R.raw.bgm));
+        BGMplayer.Play(true);*/
         SoundEffectPlayer = new MediaPlayerHelper(MediaPlayer.create(this,R.raw.correct));
 
         btnStart = findViewById(R.id.btnStart);

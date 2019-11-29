@@ -15,6 +15,10 @@ public class MediaPlayerHelper {
         this._player = player;
     }
 
+    public MediaPlayer get_player() {
+            return _player;
+    }
+
     public void Play(boolean setLoop)
     {
         if(setLoop) {
