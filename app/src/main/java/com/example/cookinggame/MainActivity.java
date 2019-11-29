@@ -40,12 +40,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void retrieveFoodsFromFirebase()
     {
-        GlobalVar.foods.clear();
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Foods");
         databaseReference.addValueEventListener(new ValueEventListener()
         {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                GlobalVar.foods.clear();
                 for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
                     GlobalVar.foods.add(dataSnapshot1.getValue(Food.class));
                 }
