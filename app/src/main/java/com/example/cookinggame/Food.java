@@ -10,12 +10,39 @@ public class Food {
     private ArrayList<Ingredient> ingredients;
 
 
+    public Food(){
+        foodID = "";
+        name = "";
+        image = "";
+        ingredients = new ArrayList<>();
+    }
+
+    public Food(String ID, String name, String image, ArrayList<Ingredient> ingredients) {
+        this.foodID = ID;
+        this.name = name;
+        this.image = image;
+        this.ingredients = ingredients;
+    }
+
     public Food(String ID, String name, String image) {
         this.foodID = ID;
         this.name = name;
         this.image = image;
         this.ingredients = new ArrayList<>();
     }
+    public Food clone(Food target)
+    {
+        this.foodID = target.foodID;
+        this.name = target.name;
+        this.image = target.image;
+        this.ingredients = new ArrayList<>();
+        for(Ingredient x : target.getAllIngredient())
+        {
+            ingredients.add(x.clone());
+        }
+        return this;
+    }
+
 
     public String getFoodID() {
         return foodID;
@@ -82,5 +109,38 @@ public class Food {
             ++count;
         }
         return count;
+    }
+
+    public ArrayList<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public boolean checkIsValidFood()
+    {
+        if(!foodID.equals("") && !name.equals("") && !image.equals(""))
+        {
+            if(ingredients.size() != 0)
+            {
+                boolean flag1 = false;
+                boolean flag2 = false;
+                for(int i = 0; i < 4; i++)
+                {
+                    if(!ingredients.get(i).getImage().equals("") && ingredients.get(i).getQuantity()!=0)
+                    {
+                        flag1 = true;
+                    }
+                }
+                for(int i = 4; i < 8; i++)
+                {
+                    if(!ingredients.get(i).getImage().equals("") && ingredients.get(i).getQuantity()!=0)
+                    {
+                        flag2 = true;
+                    }
+                }
+                if(flag1 && flag2)
+                    return true;
+            }
+        }
+        return false;
     }
 }

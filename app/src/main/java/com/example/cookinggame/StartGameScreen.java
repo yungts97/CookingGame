@@ -1,5 +1,6 @@
 package com.example.cookinggame;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -9,6 +10,7 @@ import android.database.Cursor;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,9 +22,17 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Queue;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -152,6 +162,7 @@ public class StartGameScreen extends AppCompatActivity implements View.OnClickLi
 
         }
     };
+
     public void DatabaseInitialization()
     {
         DatabaseAdapter db = new DatabaseAdapter(this);
@@ -240,7 +251,35 @@ public class StartGameScreen extends AppCompatActivity implements View.OnClickLi
     }
     public void FoodInitialization()
     {
-        DatabaseAdapter db = new DatabaseAdapter(this);
+        ArrayList<Food> foods = GlobalVar.foods;
+        ArrayList<Ingredient> ingredients = GlobalVar.all_ingredients;
+        final int min = 0;
+        final int max = GlobalVar.foods.size()-1;
+        final int random = new Random().nextInt((max - min) + 1) + min;
+        food = new Food().clone(GlobalVar.foods.get(random));
+        selectedRecipe = new Random().nextInt(2);
+        System.out.println("aaa");
+        /*DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Foods");
+        final int min = 1;
+        final int max = 5;
+        final int random = new Random().nextInt((max - min) + 1) + min;
+        Query query = databaseReference.orderByChild("foodID").equalTo(Integer.toString(random));
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
+                     food = dataSnapshot1.getValue(Food.class);
+                }
+                iniUI();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                System.out.println("a");
+            }
+        });*/
+        /*DatabaseAdapter db = new DatabaseAdapter(this);
         db.open();
         Cursor c = db.getAllFood();
         if(c.getCount() != 0) // if table is not empty, get the food and assign to the local variable
@@ -286,11 +325,44 @@ public class StartGameScreen extends AppCompatActivity implements View.OnClickLi
             }
             System.out.println(food.getName());
         }
-        db.close();
+        db.close();*/
     }
     public void IngredientsInitialization()
     {
-        DatabaseAdapter db = new DatabaseAdapter(this);
+        ingredients = new ArrayList<>();
+        for(int i = 0; i < food.getAllIngredient(selectedRecipe).size(); i++)
+        {
+            for(int j = 0; j < food.getAllIngredient(selectedRecipe).get(i).getQuantity(); j++)
+            {
+                ingredients.add(food.getAllIngredient(selectedRecipe).get(i));
+            }
+        }
+        ArrayList<Ingredient> temp_ingredient1 = food.getAllIngredient(selectedRecipe);
+        ArrayList<Ingredient> temp_ingredient2 = new ArrayList<>();
+        for(int i = 0; i < GlobalVar.all_ingredients.size(); i++)
+        {
+            for(int j = 0; j < temp_ingredient1.size(); j++)
+            {
+                if(GlobalVar.all_ingredients.get(i).getImage().equals(temp_ingredient1.get(j).getImage()))
+                {
+                    break;
+                }
+                if(j == 3)
+                    temp_ingredient2.add(GlobalVar.all_ingredients.get(i));
+            }
+
+        }
+        int count = ingredients.size(); // get the size of current list for add ingredient to the left room of list.
+        int min = 0;
+        int max = temp_ingredient2.size()-1;
+        for(int i = 0; i < (42-count);i++)
+        {
+            int random = new Random().nextInt((max - min) + 1) + min;
+            ingredients.add(temp_ingredient2.get(random));
+        }
+        Collections.shuffle(ingredients);
+
+        /*DatabaseAdapter db = new DatabaseAdapter(this);
         db.open();
 
         //init ingredients (food used ingredient)
@@ -325,7 +397,7 @@ public class StartGameScreen extends AppCompatActivity implements View.OnClickLi
             ingredients.add(ingredientFromDB.get(random));
         }
         Collections.shuffle(ingredients);
-        db.close();
+        db.close();*/
     }
 
     public void initData()
@@ -339,7 +411,8 @@ public class StartGameScreen extends AppCompatActivity implements View.OnClickLi
         animation = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.animation);
         animation1 = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.hide_animation);
 
-        DatabaseInitialization(); //
+
+        //DatabaseInitialization(); //
         FoodInitialization(); //
         IngredientsInitialization(); //
     }
@@ -426,7 +499,8 @@ public class StartGameScreen extends AppCompatActivity implements View.OnClickLi
         {
             int begin_index = food.getBeginIndexOfSet(selectedRecipe);
             txtRecipeAmt.get(j+begin_index).startAnimation(animation);
-            txtRecipeAmt.get(j+begin_index).setText(food.getAllIngredient(selectedRecipe).get(j).getCollectedQty()+"/"+food.getAllIngredient(selectedRecipe).get(j).getQuantity());
+            if(food.getAllIngredient(selectedRecipe).get(j).getQuantity()!=0)
+                txtRecipeAmt.get(j+begin_index).setText(food.getAllIngredient(selectedRecipe).get(j).getCollectedQty()+"/"+food.getAllIngredient(selectedRecipe).get(j).getQuantity());
         }
         if(selectedRecipe == 0)
         {

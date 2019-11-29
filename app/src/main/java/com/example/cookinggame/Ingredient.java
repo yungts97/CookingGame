@@ -7,14 +7,29 @@ public class Ingredient {
     private int collectedQty;
     private int set;
 
-    public Ingredient(String image, int quantity, int set) {
-        //this.ingredientID = ID;
+    public Ingredient(){}
+
+    public Ingredient(int ingredientID, String image, int quantity, int set)
+    {
+        this.ingredientID = ingredientID;
         this.image = image;
         this.quantity = quantity;
         this.collectedQty = 0;
         this.set = set;
     }
 
+    public Ingredient(String image, int quantity, int set) {
+        this.ingredientID = 0;
+        this.image = image;
+        this.quantity = quantity;
+        this.collectedQty = 0;
+        this.set = set;
+    }
+
+    public Ingredient clone()
+    {
+        return new Ingredient(this.ingredientID, this.image,this.quantity,this.set);
+    }
     public boolean checkCollectedQty() {
         return quantity == collectedQty;
     }

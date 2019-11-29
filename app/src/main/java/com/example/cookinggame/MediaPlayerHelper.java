@@ -79,7 +79,7 @@ public class MediaPlayerHelper {
     }
 
     private void fadeOutStep(float deltaVolume){
-        _player.setVolume(volume, volume);
+                       _player.setVolume(volume, volume);
         volume -= deltaVolume;
     }
     private void stopPlayer() {

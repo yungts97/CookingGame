@@ -9,16 +9,22 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private ImageButton btnStart, btnSetting, btnInfo;
+    private ImageButton btnStart, btnSetting, btnInfo, btnMenu, btnCustom;
+    private TextView txtCustom, txtSetting;
     public static MediaPlayerHelper BGMplayer;
     public static MediaPlayerHelper GameBGMplayer;
     public static MediaPlayerHelper SoundEffectPlayer;
@@ -29,13 +35,137 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        iniUI();
         initFireBase();
     }
 
+    private void retrieveFoodsFromFirebase()
+    {
+        GlobalVar.foods.clear();
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Foods");
+        databaseReference.addValueEventListener(new ValueEventListener()
+        {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
+                    GlobalVar.foods.add(dataSnapshot1.getValue(Food.class));
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                System.out.println("a");
+            }
+        });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+        rootRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                if (snapshot.hasChild("Foods")) {
+                    retrieveFoodsFromFirebase();
+                }
+                if(snapshot.hasChild("Score"))
+                {
+                    retrieveScoreFromFirebase();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void retrieveIngredientsFromFirebase()
+    {
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Ingredients");
+        databaseReference.addValueEventListener(new ValueEventListener()
+        {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
+                    GlobalVar.all_ingredients.add(dataSnapshot1.getValue(Ingredient.class));
+                }
+                iniUI();
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                System.out.println("a");
+            }
+        });
+    }
+    private void retrieveScoreFromFirebase()
+    {
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Score");
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener()
+        {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    GlobalVar.Score = dataSnapshot.getValue(Integer.class);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                System.out.println("a");
+            }
+        });
+    }
     private void initFireBase()
     {
-        databaseReference = FirebaseDatabase.getInstance().getReference("Foods");
+        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+        rootRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                if (!snapshot.hasChild("Foods")) {
+                    InitFoodFireBase();
+                }
+                else
+                {
+                    retrieveFoodsFromFirebase();
+                }
+                if(!snapshot.hasChild("Ingredients"))
+                {
+                    InitIngredientFireBase();
+                }
+                else
+                {
+                    retrieveIngredientsFromFirebase();
+                }
+                if(!snapshot.hasChild("Score"))
+                {
+                    InitScore();
+                }
+                else
+                {
+                    retrieveScoreFromFirebase();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+    private void InitScore()
+    {
+        databaseReference = FirebaseDatabase.getInstance().getReference("Score");
+        databaseReference.setValue(GlobalVar.Score, new DatabaseReference.CompletionListener() {
+                @Override
+                public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                    System.out.println(databaseError);
+                    System.out.println(databaseReference);
+                    System.out.println("insert successfully");
+                }
+            });
+
+    }
+
+    private void InitFoodFireBase()
+    {
         String[] foodnames = getResources().getStringArray(R.array.foods);
         String[] foodimages = getResources().getStringArray(R.array.food_images);
 
@@ -106,10 +236,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ingredients.add(ingredients4);
         ingredients.add(ingredients5);
 
-        for(int i = 0; i < foodnames.length; i++)
+        databaseReference = FirebaseDatabase.getInstance().getReference("Foods");
+        for(int i = 0; i < foodnames.length; i++) // set foods into firebase
         {
             String FoodID = databaseReference.push().getKey();
-            Food food = new Food(FoodID,foodnames[i],foodimages[i]);
+            Food food = new Food(Integer.toString(i+1),foodnames[i],foodimages[i]);
+            GlobalVar.foods.add(food);  //initialize all foods (first time run only)
             food.setIngredients(ingredients.get(i));
             databaseReference.child(FoodID).setValue(food, new DatabaseReference.CompletionListener() {
                 @Override
@@ -119,10 +251,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     System.out.println("insert successfully");
                 }
             });
-
-
         }
 
+
+    }
+
+    private void InitIngredientFireBase()
+    {
+        ArrayList<Ingredient> all_Ingredient = new ArrayList<>();
+        for(int i = 1; i <=20; i++)
+        {
+            all_Ingredient.add(new Ingredient("ingredient"+i,0,0));
+        }
+
+        GlobalVar.all_ingredients = all_Ingredient;  //initialize all ingredients (first time run only)
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("Ingredients");
+        for(int i = 0; i < 20; i++) // set ingredients into firebase
+        {
+            String ingredientID = databaseReference.push().getKey();
+            databaseReference.child(ingredientID).setValue(all_Ingredient.get(i), new DatabaseReference.CompletionListener() {
+                @Override
+                public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                    System.out.println(databaseError);
+                    System.out.println(databaseReference);
+                    System.out.println("insert successfully");
+                }
+            });
+        }
     }
 
     private void iniUI()
@@ -132,11 +288,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         SoundEffectPlayer = new MediaPlayerHelper(MediaPlayer.create(this,R.raw.correct));
 
         btnStart = findViewById(R.id.btnStart);
+        btnMenu = findViewById(R.id.btnMenu);
         btnSetting = findViewById(R.id.btnSetting);
+        btnCustom = findViewById(R.id.btnCustom);
         btnInfo = findViewById(R.id.btnInfo);
 
+        txtCustom = findViewById(R.id.txtCustom);
+        txtSetting = findViewById(R.id.txtSetting);
+
+        txtCustom.setOnClickListener(this);
+        txtSetting.setOnClickListener(this);
         btnStart.setOnClickListener(this);
         btnSetting.setOnClickListener(this);
+        btnMenu.setOnClickListener(this);
+        btnCustom.setOnClickListener(this);
         btnInfo.setOnClickListener(this);
     }
 
@@ -149,15 +314,69 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent intent = new Intent(this,StartGameScreen.class);
             startActivity(intent);
         }
+        else if(view.getId() == R.id.txtCustom)
+        {
+            Intent intent = new Intent(this,CustomActivity.class);
+            startActivity(intent);
+            btnSetting.setVisibility(View.INVISIBLE);
+            btnCustom.setVisibility(View.INVISIBLE);
+            txtSetting.setVisibility(View.INVISIBLE);
+            txtCustom.setVisibility(View.INVISIBLE);
+        }
+        else if(view.getId() == R.id.txtSetting)
+        {
+            Intent intent = new Intent(this,SettingScreen.class);
+            startActivity(intent);
+            btnSetting.setVisibility(View.INVISIBLE);
+            btnCustom.setVisibility(View.INVISIBLE);
+            txtSetting.setVisibility(View.INVISIBLE);
+            txtCustom.setVisibility(View.INVISIBLE);
+        }
+        else if(view.getId() == R.id.btnMenu)
+        {
+            if(btnSetting.getVisibility() == View.VISIBLE)
+            {
+                btnSetting.setVisibility(View.INVISIBLE);
+                btnCustom.setVisibility(View.INVISIBLE);
+                txtSetting.setVisibility(View.INVISIBLE);
+                txtCustom.setVisibility(View.INVISIBLE);
+
+            }
+            else
+            {
+                btnSetting.setVisibility(View.VISIBLE);
+                btnCustom.setVisibility(View.VISIBLE);
+                txtSetting.setVisibility(View.VISIBLE);
+                txtCustom.setVisibility(View.VISIBLE);
+            }
+
+        }
         else if(view.getId() == R.id.btnSetting)
         {
             Intent intent = new Intent(this,SettingScreen.class);
             startActivity(intent);
+            btnSetting.setVisibility(View.INVISIBLE);
+            btnCustom.setVisibility(View.INVISIBLE);
+            txtSetting.setVisibility(View.INVISIBLE);
+            txtCustom.setVisibility(View.INVISIBLE);
+        }
+        else if(view.getId() == R.id.btnCustom)
+        {
+            Intent intent = new Intent(this,CustomActivity.class);
+            startActivity(intent);
+            btnSetting.setVisibility(View.INVISIBLE);
+            btnCustom.setVisibility(View.INVISIBLE);
+            txtSetting.setVisibility(View.INVISIBLE);
+            txtCustom.setVisibility(View.INVISIBLE);
         }
         else if(view.getId() == R.id.btnInfo)
         {
             Intent intent = new Intent(this,HelpScreen.class);
             startActivity(intent);
+            btnSetting.setVisibility(View.INVISIBLE);
+            btnCustom.setVisibility(View.INVISIBLE);
+            txtSetting.setVisibility(View.INVISIBLE);
+            txtCustom.setVisibility(View.INVISIBLE);
         }
     }
 }

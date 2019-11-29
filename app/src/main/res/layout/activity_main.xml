@@ -33,7 +33,7 @@
         android:layout_height="match_parent">
 
         <ImageButton
-            android:id="@+id/btnSetting"
+            android:id="@+id/btnMenu"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:scaleType="fitXY"
@@ -41,7 +41,57 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:background="@android:color/transparent"
+            android:src="@drawable/menu" />
+
+        <ImageButton
+            android:id="@+id/btnSetting"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:scaleType="fitXY"
+            android:layout_margin="20dp"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/btnMenu"
+            android:background="@android:color/transparent"
             android:src="@drawable/setting" />
+
+        <ImageButton
+            android:id="@+id/btnCustom"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:scaleType="fitXY"
+            android:layout_margin="20dp"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/btnSetting"
+            android:background="@android:color/transparent"
+            android:src="@drawable/recipe" />
+
+        <TextView
+            android:id="@+id/txtSetting"
+            android:layout_marginLeft="20dp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textColor="@android:color/white"
+            android:text="Setting"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@id/btnSetting"
+            app:layout_constraintLeft_toRightOf="@id/btnSetting"/>
+
+        <TextView
+            android:id="@+id/txtCustom"
+            android:layout_marginLeft="20dp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textColor="@android:color/white"
+            android:text="Custom"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@id/btnCustom"
+            app:layout_constraintLeft_toRightOf="@id/btnCustom"/>
 
         <ImageButton
             android:id="@+id/btnInfo"

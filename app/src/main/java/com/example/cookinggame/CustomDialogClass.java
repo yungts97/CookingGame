@@ -11,7 +11,12 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public class CustomDialogClass extends Dialog implements android.view.View.OnClickListener {
 
@@ -39,7 +44,29 @@ public class CustomDialogClass extends Dialog implements android.view.View.OnCli
         btnYes.setOnClickListener(this);
         dialog.show();
 
-        DatabaseAdapter db = new DatabaseAdapter(c);
+
+        if(StartGameScreen.score > GlobalVar.Score)
+        {
+            textView1.setText("Your Score: " + StartGameScreen.score);
+            textView2.setText("High Score: " + StartGameScreen.score);
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Score");
+            databaseReference.setValue(StartGameScreen.score, new DatabaseReference.CompletionListener() {
+                @Override
+                public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                    System.out.println(databaseError);
+                    System.out.println(databaseReference);
+                    System.out.println("insert successfully");
+                }
+            });
+        }
+        else
+        {
+            textView1.setText("Your Score: " + StartGameScreen.score);
+            textView2.setText("High Score: " + GlobalVar.Score);
+        }
+        StartGameScreen.score = 0;
+
+        /*DatabaseAdapter db = new DatabaseAdapter(c);
         db.open();
         Cursor c = db.getHighScore();
         if(c.getCount() == 0)
@@ -58,7 +85,7 @@ public class CustomDialogClass extends Dialog implements android.view.View.OnCli
             textView1.setText("Your Score: " + StartGameScreen.score);
             textView2.setText("High Score: " + c.getInt(1));
         }
-        db.close();
+        db.close();*/
     }
 
     @Override
