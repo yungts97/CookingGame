@@ -1,7 +1,5 @@
 language: android
 dist: trusty
-before_install:
- - chmod +x gradlew
 android:
   components:
     # Uncomment the lines below if you want to
@@ -27,3 +25,5 @@ android:
     - sys-img-armeabi-v7a-android-17
 notifications:
   slack: yungpersonalproject:JjGcdE3crxMYHThMRNiVspoq
+before_install:
+ - chmod +x gradlew
