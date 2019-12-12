@@ -42,10 +42,6 @@ public class MediaPlayerHelper {
         FadeOut();
         //_player.stop();
     }
-    public void Pause()
-    {
-        this._player.pause();
-    }
 
     private void FadeOut(){
 

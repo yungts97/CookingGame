@@ -123,6 +123,7 @@ public class StartGameScreen extends AppCompatActivity implements View.OnClickLi
             if(secondForShowIngredient == 0)
             {
                 flagIngredeintTimer = false;
+                flagGameTimer = true;
                 showIngredientTimer.cancel();
                 StartGameTimer();
             }
@@ -137,7 +138,7 @@ public class StartGameScreen extends AppCompatActivity implements View.OnClickLi
 
             txtTime.setText("Remaing " + (secondForGame) + " seconds");
             progressBar.setProgress(secondForGame);
-            if(secondForGame == 0)
+            if(secondForGame == 0 && flagGameTimer)
             {
                 flagGameTimer = false;
                 timer.cancel();
@@ -392,7 +393,7 @@ public class StartGameScreen extends AppCompatActivity implements View.OnClickLi
 
     public void initData()
     {
-        flagGameTimer = true;
+        flagGameTimer = false;
         flagIngredeintTimer = true;
         secondForShowIngredient = 10;
         secondForGame = 30;

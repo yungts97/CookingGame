@@ -1,7 +1,6 @@
 package com.example.cookinggame;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Food {
     private String foodID;

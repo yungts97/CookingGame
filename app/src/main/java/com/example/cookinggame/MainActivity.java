@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageButton btnStart, btnSetting, btnInfo, btnMenu, btnCustom;
     private TextView txtCustom, txtSetting;
     public static MediaPlayerHelper BGMplayer;
-    public static MediaPlayerHelper GameBGMplayer;
     public static MediaPlayerHelper SoundEffectPlayer;
     public static int background = 1;
     private DatabaseReference databaseReference;

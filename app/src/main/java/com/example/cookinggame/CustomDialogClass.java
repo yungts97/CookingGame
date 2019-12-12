@@ -92,10 +92,6 @@ public class CustomDialogClass extends Dialog implements android.view.View.OnCli
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.buttonOk:
-                MainActivity.GameBGMplayer.Pause();
-                MainActivity.GameBGMplayer.Stop();
-                MainActivity.BGMplayer = new MediaPlayerHelper(MediaPlayer.create(getContext(),R.raw.bgm));
-                MainActivity.BGMplayer.Play(true);
                 dialog.dismiss();
                 c.finish();
                 break;
